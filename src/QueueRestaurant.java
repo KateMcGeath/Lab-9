@@ -6,15 +6,9 @@ import java.util.ArrayList;
  * the first ticket to be completed. i.e. the QueueRestaurant behaves as one would expect a normal restaurant to.
  * The first order placed is the first order completed (regardless of the timeOrdered).
  * 
- * @author Stephen
- * @version 2018-10-10
+ * @author Kate McGeath
+ * @version 2018-10-15
  * 
- * @modified by Em Evans
- * @version 2019-30-09
- * Lab7
- * 
- * @modified by Em Evans
- * @version 2019-12-10
  * Lab9
  */
 public class QueueRestaurant<T> extends Restaurant<T>{
@@ -25,7 +19,7 @@ public class QueueRestaurant<T> extends Restaurant<T>{
 	
 	public QueueRestaurant()
 	{
-		//TODO: implement this
+		orderList = new ArrayList<Order<T>>(ORDER_LIST_SIZE);
 	}
     /**
      * Add an order to the restaurant. If there is no more room (number of tickets in the restaurant == maxSize of
@@ -53,7 +47,9 @@ public class QueueRestaurant<T> extends Restaurant<T>{
 	@Override
 	protected Order<T> completeOrder()
 	{
-		//TODO: implement this
+		orderList.remove(0);
+		numOrders = numOrders - 1;
+		return orderList.get(0);
 	}
     /**
      * Computes the number of orders in the restaurant that have not been completed.
@@ -63,7 +59,7 @@ public class QueueRestaurant<T> extends Restaurant<T>{
 	@Override
 	protected int numberRemainingOrder()
 	{
-		//TODO: implement this
+		return orderList.size();
 	}
     /**
      * @return the next order to be completed (but do not remove it)
@@ -71,6 +67,6 @@ public class QueueRestaurant<T> extends Restaurant<T>{
 	@Override
 	protected Order<T> checkNextCompletedOrder()
 	{
-		//TODO: implement this;
+		return orderList.get(0);
 	}
 }

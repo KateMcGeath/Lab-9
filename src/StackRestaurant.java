@@ -14,26 +14,26 @@ public class StackRestaurant<T> extends Restaurant<T> {
 
 	private static final int ORDER_LIST_SIZE = 10;
 	private ArrayList<Order<T>> orderList;
-	private int topOfStack;
+	private int topOfStack = -1;
 	
     /**
      * Create the stack restaurant. Initializes the Order storage variables.
      */
 	public StackRestaurant()
 	{
-		orderList = new ArrayList<Order<T>>(ORDER_LIST_SIZE);
+		orderList = new ArrayList<Order<T>>();
 	}
     /**
      * Add an order to the restaurant.
      * 
-     * @param order The order to be added.
+     * @param order The order to be added
      * @return True. Because the StackRestaurant should resize if it runs out of room to store tickets, a ticket
      * should always be added, and this method should always return true.
      */
 	@Override
 	public boolean addOrder(Order<T> order)
 	{
-		orderList.add(order);
+		this.orderList.add(order);
 		topOfStack++;
 		return true;
 	}
@@ -43,9 +43,14 @@ public class StackRestaurant<T> extends Restaurant<T> {
 	@Override
 	protected Order<T> completeOrder()
 	{
-		orderList.remove(topOfStack);
-		topOfStack = topOfStack - 1;
-		return orderList.get(topOfStack);
+		if(topOfStack == -1)
+			return null;
+		else {
+			Order<T> order = orderList.get(topOfStack);
+			orderList.remove(order);
+			topOfStack = topOfStack - 1;
+			return order;
+		}
 	}
     /**
      * Computes the number of orders in the restaurant that have not been completed.
@@ -55,12 +60,15 @@ public class StackRestaurant<T> extends Restaurant<T> {
 	@Override
 	public int numberRemainingOrder()
 	{
-		return topOfStack;
+		return topOfStack + 1;
 	}
 	
 	@Override
 	protected Order<T> checkNextCompletedOrder()
 	{
-		return orderList.get(topOfStack);
+		if(topOfStack == -1)
+			return null;
+		else
+			return orderList.get(topOfStack);
 	}
 }

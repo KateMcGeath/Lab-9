@@ -47,9 +47,14 @@ public class QueueRestaurant<T> extends Restaurant<T>{
 	@Override
 	protected Order<T> completeOrder()
 	{
-		orderList.remove(0);
-		numOrders = numOrders - 1;
-		return orderList.get(0);
+		if(numOrders == 0)
+			return null;
+		else {
+			Order<T> order = orderList.get(0);
+			orderList.remove(0);
+			numOrders = numOrders - 1;
+			return order;
+		}
 	}
     /**
      * Computes the number of orders in the restaurant that have not been completed.
@@ -67,6 +72,9 @@ public class QueueRestaurant<T> extends Restaurant<T>{
 	@Override
 	protected Order<T> checkNextCompletedOrder()
 	{
-		return orderList.get(0);
+		if(numOrders == 0)
+			return null;
+		else
+			return orderList.get(0);
 	}
 }

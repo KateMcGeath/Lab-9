@@ -70,11 +70,11 @@ public class Order<T> implements Comparable<Order<T>>
 	{
 		int output = 0;
 		if(this.getTimeOrdered() - order.getTimeOrdered() > 0)
-			output = -1;
+			output = 1;
 		else if(this.getTimeOrdered() - order.getTimeOrdered() == 0)
 			output = 0;
 		else
-			output = 1;
+			output = -1;
 		return output;
 	}
 }

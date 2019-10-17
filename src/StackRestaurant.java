@@ -5,15 +5,9 @@ import java.util.ArrayList;
  * the first ticket to be completed. This is in contrast to the QueueRestaurant which operates how a restaurant
  * normally would.
  * 
- * @author Stephen  
- * @version 2018-10-10
+ * @author Kate McGeath 
+ * @version 2018-10-15
  * 
- * @modified by Em Evans
- * @version 2019-09-30
- * Lab7
- * 
- * @modified by Em Evans
- * @version 2019-10-12
  * Lab9
  */
 public class StackRestaurant<T> extends Restaurant<T> {
@@ -27,7 +21,7 @@ public class StackRestaurant<T> extends Restaurant<T> {
      */
 	public StackRestaurant()
 	{
-		//TODO: implement this
+		orderList = new ArrayList<Order<T>>(ORDER_LIST_SIZE);
 	}
     /**
      * Add an order to the restaurant.
@@ -39,7 +33,9 @@ public class StackRestaurant<T> extends Restaurant<T> {
 	@Override
 	public boolean addOrder(Order<T> order)
 	{
-		//TODO: implement this
+		orderList.add(order);
+		topOfStack++;
+		return true;
 	}
     /**
      * [Internal Code - This is not required by the specification but can be a useful construct.]
@@ -47,7 +43,9 @@ public class StackRestaurant<T> extends Restaurant<T> {
 	@Override
 	protected Order<T> completeOrder()
 	{
-		//TODO: implement this
+		orderList.remove(topOfStack);
+		topOfStack = topOfStack - 1;
+		return orderList.get(topOfStack);
 	}
     /**
      * Computes the number of orders in the restaurant that have not been completed.
@@ -57,12 +55,12 @@ public class StackRestaurant<T> extends Restaurant<T> {
 	@Override
 	public int numberRemainingOrder()
 	{
-		//TODO: implement this
+		return topOfStack;
 	}
 	
 	@Override
 	protected Order<T> checkNextCompletedOrder()
 	{
-		//TODO: implement this
+		return orderList.get(topOfStack);
 	}
 }

@@ -1,12 +1,9 @@
 import java.util.PriorityQueue;
 
 /**
- * @author CS2334, modified by Stephen Thung
- * @version 2018-02-26
- * Lab 7
- * 
- * @modified by Em Evans
- * @version 2019-10-12
+ * @author Kate McGeath
+ * @version 2018-10-17
+ *
  * Lab 9
  * 
  * Restaurant class that stores orders in a PriorityQueue. This class uses the natural ordering of the Orders
@@ -18,10 +15,11 @@ import java.util.PriorityQueue;
 public class PriorityQueueRestaurant<T> extends Restaurant<T>
 {
     private PriorityQueue<Order<T>> orderList;
+    private int numOfOrders;
 
     public PriorityQueueRestaurant()
     {
-    	//TODO: implement this
+    	orderList = new PriorityQueue<Order<T>>();
     }
     /**
      * Add an order to the restaurant. If there is no more room (number of tickets in the restaurant == maxSize of
@@ -33,7 +31,9 @@ public class PriorityQueueRestaurant<T> extends Restaurant<T>
     @Override
     public boolean addOrder(Order<T> order)
     {
-    	//TODO: implement this
+    	orderList.add(order);
+    	numOfOrders++;
+    	return true;
     }
     /**
      * @return The next order to be removed.
@@ -41,7 +41,7 @@ public class PriorityQueueRestaurant<T> extends Restaurant<T>
     @Override
     protected Order<T> completeOrder()
     {
-    	//TODO: implement this
+    	return orderList.poll();
     }
     /**
      * Gets the number of orders stored.
@@ -50,7 +50,7 @@ public class PriorityQueueRestaurant<T> extends Restaurant<T>
     @Override
     protected int numberRemainingOrder()
     {
-    	//TODO: implement this
+    	return orderList.size();
     }
     /**
      * Get the next order to be completed.
@@ -59,6 +59,6 @@ public class PriorityQueueRestaurant<T> extends Restaurant<T>
     @Override
     public Order<T> checkNextCompletedOrder()
     {
-    	//TODO: implement this
+    	return orderList.peek();
     }
 }

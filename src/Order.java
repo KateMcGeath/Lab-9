@@ -3,11 +3,11 @@
  * stored in some way (how they are stored is up to the subclasses). The order in which Orders are
  * completed is also dependent on the subclass' implementation of the abstract methods.
  * 
- * @author Stephen
+ * @author Kate McGeath
  * @version 2018-10-10
  * 
  * @modified by Em Evans
- * @version 2019-09-27
+ * @version 2019-10-17
  * Lab 9
  */
 
@@ -30,21 +30,22 @@ public class Order<T> implements Comparable<Order<T>>
      */
 	public Order(T description, int timeOrdered)
 	{
-		//TODO: implement this
+		this.description = description;
+		this.timeOrdered = timeOrdered;
 	}
 	/**
 	 * @return description
 	 */
 	public T getDescription()
 	{
-		//TODO: implement this
+		return description;
 	}
 	/**
 	 * @return timeOrdered
 	 */
 	public int getTimeOrdered()
 	{
-		//TODO: implement this
+		return timeOrdered;
 	}
 	/**
 	 * toString override. 
@@ -67,6 +68,6 @@ public class Order<T> implements Comparable<Order<T>>
 	@Override
 	public int compareTo(Order<T> order)
 	{
-		//TODO: implement this
+		return this.getTimeOrdered() - order.getTimeOrdered();
 	}
 }

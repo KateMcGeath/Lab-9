@@ -68,6 +68,13 @@ public class Order<T> implements Comparable<Order<T>>
 	@Override
 	public int compareTo(Order<T> order)
 	{
-		return this.getTimeOrdered() - order.getTimeOrdered();
+		int output = 0;
+		if(this.getTimeOrdered() - order.getTimeOrdered() > 0)
+			output = -1;
+		else if(this.getTimeOrdered() - order.getTimeOrdered() == 0)
+			output = 0;
+		else
+			output = 1;
+		return output;
 	}
 }
